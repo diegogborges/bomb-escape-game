@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/game/bomb.gd" id="1"]
+
+[sub_resource type="CircleShape2D" id="1"]
+radius = 14.0
+
+[node name="Bomb" type="Area2D"]
+script = ExtResource("1")
+collision_layer = 4
+collision_mask = 0
+
+[node name="Visual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-12, -12, 12, -12, 12, 12, -12, 12)
+color = Color(0.09, 0.09, 0.12, 1)
+
+[node name="Fuse" type="Polygon2D" parent="."]
+position = Vector2(0, -14)
+polygon = PackedVector2Array(-3, -4, 3, -4, 3, 4, -3, 4)
+color = Color(1, 0.78, 0.24, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1")
+
+[node name="FuseTimer" type="Timer" parent="."]
+one_shot = true

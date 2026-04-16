@@ -1,0 +1,100 @@
+[gd_scene load_steps=2 format=3 uid="uid://ui_block_blast_survival"]
+
+[ext_resource type="Script" path="res://scripts/game/ui.gd" id="1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_movement"]
+radius = 95.0
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1")
+layer = 10
+
+[node name="TopBar" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 100.0
+
+[node name="TopInfo" type="HBoxContainer" parent="TopBar"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="ScoreLabel" type="Label" parent="TopBar/TopInfo"]
+text = "Score: 0"
+theme_override_font_sizes/font_size = 42
+
+[node name="BestLabel" type="Label" parent="TopBar/TopInfo"]
+text = "Best: 0"
+theme_override_font_sizes/font_size = 30
+
+[node name="BottomControls" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MovementPad" type="TouchScreenButton" parent="BottomControls"]
+position = Vector2(44, 994)
+shape = SubResource("CircleShape2D_movement")
+visibility_mode = 0
+
+[node name="BombButton" type="Button" parent="BottomControls"]
+anchors_preset = 9
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -238.0
+offset_top = -230.0
+offset_right = -26.0
+offset_bottom = -24.0
+text = "BOMBA"
+theme_override_font_sizes/font_size = 38
+
+[node name="CenterPanel" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="OverlayVBox" type="VBoxContainer" parent="CenterPanel"]
+alignment = 1
+theme_override_constants/separation = 12
+
+[node name="StatusLabel" type="Label" parent="CenterPanel/OverlayVBox"]
+text = "Sobreviva o maximo possivel"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 52
+
+[node name="SubStatusLabel" type="Label" parent="CenterPanel/OverlayVBox"]
+text = "Desvie de blocos e use bombas"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 28
+
+[node name="RestartButton" type="Button" parent="CenterPanel/OverlayVBox"]
+text = "JOGAR DE NOVO"
+theme_override_font_sizes/font_size = 34
+
+[node name="ReviveButton" type="Button" parent="CenterPanel/OverlayVBox"]
+text = "CONTINUAR (AD)"
+theme_override_font_sizes/font_size = 30
+
+[node name="NearMissLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 160.0
+offset_right = 128.0
+offset_bottom = 206.0
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 44
+text = "Quase!"
+
+[node name="DebugLabel" type="Label" parent="."]
+offset_left = 18.0
+offset_top = 108.0
+offset_right = 690.0
+offset_bottom = 144.0
+theme_override_font_sizes/font_size = 18
+text = "DEBUG: OFF"
