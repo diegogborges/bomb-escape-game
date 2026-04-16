@@ -3,6 +3,11 @@ class_name BlockSpawner
 
 signal spawn_requested(block_type: int, spawn_position: Vector2, fall_speed: float)
 
+const BLOCK_TYPE_NORMAL := 0
+const BLOCK_TYPE_HEAVY := 1
+const BLOCK_TYPE_EXPLOSIVE := 2
+const BLOCK_TYPE_RARE := 3
+
 @export var spawn_width := 680.0
 @export var spawn_offset_x := 20.0
 @export var spawn_y := -48.0
@@ -52,7 +57,7 @@ func _get_spawn_interval() -> float:
 func _get_fall_speed(block_type: int) -> float:
 	var t: float = clampf(_difficulty_time / 90.0, 0.0, 1.0)
 	var speed: float = lerpf(base_fall_speed, max_fall_speed, t)
-	if block_type == FallingBlock.BlockType.HEAVY:
+	if block_type == BLOCK_TYPE_HEAVY:
 		speed += heavy_extra_speed
 	return speed
 
@@ -64,12 +69,12 @@ func _roll_block_type() -> int:
 	var heavy_chance: float = lerpf(0.18, 0.35, t)
 	var roll: float = randf()
 	if roll < rare_chance:
-		return FallingBlock.BlockType.RARE
+		return BLOCK_TYPE_RARE
 	if roll < rare_chance + explosive_chance:
-		return FallingBlock.BlockType.EXPLOSIVE
+		return BLOCK_TYPE_EXPLOSIVE
 	if roll < rare_chance + explosive_chance + heavy_chance:
-		return FallingBlock.BlockType.HEAVY
-	return FallingBlock.BlockType.NORMAL
+		return BLOCK_TYPE_HEAVY
+	return BLOCK_TYPE_NORMAL
 
 
 func _spawn_block() -> void:

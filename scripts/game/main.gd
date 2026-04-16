@@ -1,6 +1,7 @@
 extends Node2D
 class_name MainGame
 
+const SaveServiceScript = preload("res://scripts/services/save_service.gd")
 const PLAYER_SCENE := preload("res://scenes/Player.tscn")
 const BOMB_SCENE := preload("res://scenes/Bomb.tscn")
 const BLOCK_SCENE := preload("res://scenes/Block.tscn")
@@ -39,8 +40,8 @@ var near_miss_feedback_cooldown := 0.0
 
 func _ready() -> void:
 	randomize()
-	SaveService.load_data()
-	ui.set_best_score(SaveService.get_best_score())
+	SaveServiceScript.load_data()
+	ui.set_best_score(SaveServiceScript.get_best_score())
 	ui.bomb_pressed.connect(_on_bomb_pressed)
 	ui.restart_requested.connect(_on_restart_requested)
 	ui.revive_requested.connect(_on_revive_requested)
@@ -90,7 +91,7 @@ func _start_new_run() -> void:
 	spawner.start(true)
 	ui.hide_game_over()
 	ui.set_score(0)
-	ui.set_best_score(SaveService.get_best_score())
+	ui.set_best_score(SaveServiceScript.get_best_score())
 	ui.set_revive_enabled(can_revive)
 	ui.show_status("Sobreviva e plante bombas!")
 	is_running = true
@@ -294,7 +295,7 @@ func _on_player_died(_reason: String) -> void:
 
 	var playtime_sec := float(Time.get_ticks_msec() - run_start_msec) / 1000.0
 	analytics_service.track_run_finished(current_score, playtime_sec)
-	var best_score := SaveService.register_score(current_score)
+	var best_score: int = SaveServiceScript.register_score(current_score)
 	ads_service.on_match_finished()
 	ui.show_game_over(current_score, best_score, can_revive and ads_service.can_offer_revive())
 

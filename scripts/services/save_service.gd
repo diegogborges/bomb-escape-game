@@ -1,5 +1,5 @@
-class_name SaveService
 extends RefCounted
+class_name SaveService
 
 const SAVE_PATH := "user://save_data.json"
 
