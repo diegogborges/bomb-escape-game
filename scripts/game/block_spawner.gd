@@ -45,24 +45,24 @@ func _process(delta: float) -> void:
 
 
 func _get_spawn_interval() -> float:
-	var t := clamp(_difficulty_time / 70.0, 0.0, 1.0)
+	var t: float = clampf(_difficulty_time / 70.0, 0.0, 1.0)
 	return lerpf(base_spawn_interval, min_spawn_interval, t)
 
 
 func _get_fall_speed(block_type: int) -> float:
-	var t := clamp(_difficulty_time / 90.0, 0.0, 1.0)
-	var speed := lerpf(base_fall_speed, max_fall_speed, t)
+	var t: float = clampf(_difficulty_time / 90.0, 0.0, 1.0)
+	var speed: float = lerpf(base_fall_speed, max_fall_speed, t)
 	if block_type == FallingBlock.BlockType.HEAVY:
 		speed += heavy_extra_speed
 	return speed
 
 
 func _roll_block_type() -> int:
-	var t := clamp(_difficulty_time / 110.0, 0.0, 1.0)
-	var rare_chance := lerpf(0.05, 0.12, t)
-	var explosive_chance := lerpf(0.10, 0.22, t)
-	var heavy_chance := lerpf(0.18, 0.35, t)
-	var roll := randf()
+	var t: float = clampf(_difficulty_time / 110.0, 0.0, 1.0)
+	var rare_chance: float = lerpf(0.05, 0.12, t)
+	var explosive_chance: float = lerpf(0.10, 0.22, t)
+	var heavy_chance: float = lerpf(0.18, 0.35, t)
+	var roll: float = randf()
 	if roll < rare_chance:
 		return FallingBlock.BlockType.RARE
 	if roll < rare_chance + explosive_chance:
@@ -73,7 +73,7 @@ func _roll_block_type() -> int:
 
 
 func _spawn_block() -> void:
-	var block_type := _roll_block_type()
-	var x := randf_range(spawn_offset_x, spawn_offset_x + spawn_width)
-	var y := max(spawn_y, _play_rect.position.y - 80.0)
+	var block_type: int = _roll_block_type()
+	var x: float = randf_range(spawn_offset_x, spawn_offset_x + spawn_width)
+	var y: float = maxf(spawn_y, _play_rect.position.y - 80.0)
 	emit_signal("spawn_requested", block_type, Vector2(x, y), _get_fall_speed(block_type))

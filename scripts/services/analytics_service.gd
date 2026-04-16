@@ -12,8 +12,8 @@ func track_run_finished(score: int, playtime_sec: float) -> void:
 	total_playtime_sec += playtime_sec
 	total_deaths += 1
 
-	var average_score := float(total_score) / max(1, total_runs)
-	var average_play_time := total_playtime_sec / float(max(total_runs, 1))
+	var average_score: float = float(total_score) / float(maxi(1, total_runs))
+	var average_play_time: float = total_playtime_sec / float(maxi(total_runs, 1))
 	print("[Analytics] run_finished score=%d playtime=%.2f avg_score=%.2f deaths=%d" %
 		[score, playtime_sec, average_score, total_deaths])
 	print("[Analytics] session_stats runs=%d avg_playtime=%.2f total_playtime=%.2f" %
