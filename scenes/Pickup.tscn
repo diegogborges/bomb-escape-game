@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/game/pickup.gd" id="1"]
+
+[sub_resource type="CircleShape2D" id="1"]
+radius = 16.0
+
+[node name="Pickup" type="Area2D"]
+script = ExtResource("1")
+collision_layer = 0
+collision_mask = 1
+
+[node name="Sprite" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-14, 0, -6, -12, 8, -12, 14, 0, 8, 12, -6, 12)
+color = Color(0.9, 0.95, 0.2, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -8.0
+offset_top = -11.0
+offset_right = 8.0
+offset_bottom = 11.0
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "S"
+theme_override_font_sizes/font_size = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1")
+
+[node name="LifeTimer" type="Timer" parent="."]
+one_shot = true

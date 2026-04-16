@@ -1,0 +1,7 @@
+.godot/
+.import/
+*.tmp
+*.import
+export_presets.cfg
+android/build/
+.DS_Store

@@ -1,0 +1,52 @@
+[gd_scene load_steps=12 format=3 uid="uid://main_block_blast_survival"]
+
+[ext_resource type="Script" path="res://scripts/game/main.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/Bomb.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/Block.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/Pickup.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/ExplosionEffect.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://scenes/UI.tscn" id="7"]
+[ext_resource type="Script" path="res://scripts/game/block_spawner.gd" id="8"]
+[ext_resource type="Script" path="res://scripts/audio/audio_manager.gd" id="9"]
+[ext_resource type="Script" path="res://scripts/camera/camera_shaker.gd" id="10"]
+[ext_resource type="Script" path="res://scripts/services/analytics_service.gd" id="11"]
+[ext_resource type="Script" path="res://scripts/services/ads_service.gd" id="12"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Blocks" type="Node2D" parent="World"]
+
+[node name="Bombs" type="Node2D" parent="World"]
+
+[node name="Effects" type="Node2D" parent="World"]
+
+[node name="Pickups" type="Node2D" parent="World"]
+
+[node name="Camera2D" type="Camera2D" parent="World"]
+script = ExtResource("10")
+position = Vector2(360, 640)
+enabled = true
+limit_left = 0
+limit_top = 0
+limit_right = 720
+limit_bottom = 1280
+
+[node name="BlockSpawner" type="Node" parent="."]
+script = ExtResource("8")
+
+[node name="UI" parent="." instance=ExtResource("7")]
+
+[node name="Services" type="Node" parent="."]
+
+[node name="AudioManager" type="Node" parent="Services"]
+script = ExtResource("9")
+
+[node name="AnalyticsService" type="Node" parent="Services"]
+script = ExtResource("11")
+
+[node name="AdsService" type="Node" parent="Services"]
+script = ExtResource("12")
